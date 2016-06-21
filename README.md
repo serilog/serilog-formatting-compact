@@ -1,4 +1,4 @@
-# Serilog.Formatters.Compact
+# Serilog.Formatting.Compact
 
 A simple, compact JSON-based event format for Serilog. `CompactJsonFormatter` significantly reduces the byte count of small log events when compared with Serilog's default `JsonFormatter`. It achieves this through shorter built-in property names, a leaner format, and by excluding redundant information.
 
@@ -12,10 +12,10 @@ A simple `Hello, {User}` event.
 
 ### Getting started
 
-Install from [NuGet](https://nuget.org/packages/serilog.formatters.compact):
+Install from [NuGet](https://nuget.org/packages/Serilog.Formatting.Compact):
 
 ```powershell
-Install-Package Serilog.Formatters.Compact
+Install-Package Serilog.Formatting.Compact
 ```
 
 The formatter is used in conjunction with sinks that accept `ITextFormatter`. For example, the [rolling file](https://github.com/serilog/serilog-sinks-rollingfile) sink:
