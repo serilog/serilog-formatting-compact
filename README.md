@@ -1,6 +1,6 @@
 # Serilog.Formatting.Compact [![Build status](https://ci.appveyor.com/api/projects/status/96557okd9df6h47a?svg=true)](https://ci.appveyor.com/project/NicholasBlumhardt/serilog-formatting-compact) [![NuGet](https://img.shields.io/nuget/vpre/Serilog.Formatting.Compact.svg)](https://nuget.org/packages/Serilog.Formatting.Compact)
 
-A simple, compact JSON-based event format for Serilog. `CompactJsonFormatter` significantly reduces the byte count of small log events when compared with Serilog's default `JsonFormatter`. It achieves this through shorter built-in property names, a leaner format, and by excluding redundant information.
+A simple, compact JSON-based event format for Serilog. `CompactJsonFormatter` significantly reduces the byte count of small log events when compared with Serilog's default `JsonFormatter`, while remaining human-readable. It achieves this through shorter built-in property names, a leaner format, and by excluding redundant information.
 
 ### Sample
 
