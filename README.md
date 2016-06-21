@@ -22,7 +22,7 @@ The formatter is used in conjunction with sinks that accept `ITextFormatter`. Fo
 
 ```csharp
 Log.Logger = new LoggerConfiguration()
-  .WriteTo.Sink(new RollingFileSink("./logs/myapp", new CompactJsonFormatter()
+  .WriteTo.Sink(new RollingFileSink("./logs/myapp.txt", new CompactJsonFormatter(), null, null))
   .CreateLogger();
 ```
 
