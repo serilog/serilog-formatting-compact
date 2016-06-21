@@ -9,7 +9,7 @@ namespace Serilog.Formatting.Compact.Tests
 {
     public class CompactJsonFormatterTests
     {
-        void AssertValidJson(Action<ILogger> act)
+        JObject AssertValidJson(Action<ILogger> act)
         {
             var output = new StringWriter();
             var formatter = new CompactJsonFormatter();
@@ -22,7 +22,7 @@ namespace Serilog.Formatting.Compact.Tests
             var json = output.ToString();
 
             // Unfortunately this will not detect all JSON formatting issues; better than nothing however.
-            JObject.Parse(json);
+            return JObject.Parse(json);
         }
 
         [Fact]
@@ -65,6 +65,18 @@ namespace Serilog.Formatting.Compact.Tests
         public void MultipleRenderingsAreDelimited()
         {
             AssertValidJson(log => log.Information("Rendering {First:x8} and {Second:x8}", 1, 2));
+        }
+
+        [Fact]
+        public void AtPrefixedPropertyNamesAreEscaped()
+        {
+            // Not possible in message templates, but accepted this way
+            var jobject = AssertValidJson(log => log.ForContext("@Mistake", 42)
+                                                    .Information("Hello"));
+
+            JToken val;
+            Assert.True(jobject.TryGetValue("@@Mistake", out val));
+            Assert.Equal(42, val.ToObject<int>());
         }
     }
 }

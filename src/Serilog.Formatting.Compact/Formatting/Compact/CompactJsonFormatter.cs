@@ -102,8 +102,15 @@ namespace Serilog.Formatting.Compact
 
             foreach (var property in logEvent.Properties)
             {
+                var name = property.Key;
+                if (name.Length > 0 && name[0] == '@')
+                {
+                    // Escape first '@' by doubling
+                    name = '@' + name;
+                }
+
                 output.Write(',');
-                JsonValueFormatter.WriteQuotedJsonString(property.Key, output);
+                JsonValueFormatter.WriteQuotedJsonString(name, output);
                 output.Write(':');
                 valueFormatter.Format(property.Value, output);
             }
