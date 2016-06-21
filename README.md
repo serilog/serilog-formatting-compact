@@ -26,6 +26,40 @@ Log.Logger = new LoggerConfiguration()
   .CreateLogger();
 ```
 
+### Format details
+
+The format written by `CompactJsonFormatter` is specified generically so that implementations for other logging libraries, including _Microsoft.Extensions.Logging_, are possible if desired.
+
+The implementation in this repository obeys the specification but does not yet support the `@m` (rendered message) property, and has no need for the `@i` (event id) property.
+
+##### Payload
+
+Each event is a JSON object with event data at the top level. Any JSON property on the payload object is assumed to be a regular property of the event, apart from the reified properties below.
+
+##### Reified properties
+
+The format defines a handful of reified properties that have special meaning:
+
+| Property | Name | Description | Required? |
+| -------- | ---- | ----------- | --------- |
+| `@t`     | Timestamp | An ISO 8601 timestamp | Yes |
+| `@m`     | Message | A fully-rendered message describing the event | |
+| `@mt` | Message Template | Alternative to Message; specifies a [message template](http://messagetemplates.org) over the event's properties that provides for rendering into a textual description of the event | |
+| `@l` | Level | An implementation-specific level identifier (string or number) | Absence implies "informational"  |
+| `@x` | Exception | A language-dependent error representation potentially including backtrace | |
+| `@i` | Event id | An implementation specific event id (string or number) | |
+| `@r` | Renderings | If `@mt` includes properties with programming-language-specific formatting, an array of pre-rendered values for each such property | |
+
+The `@` sigil may be escaped at the start of a user property name by doubling, e.g. `@@name` denotes a property called `@name`.
+
+##### Batch format
+
+When events are batched into a single payload, a newline-delimited stream of JSON documents is required. Either `\n` or `\r\n` delimiters may be used.
+
+##### Versioning
+
+Versioning would be additive only, with no version identifier; implementations should treat any unrecognised reified properties as if they are user data.
+
 ### Comparison
 
 **Event**
@@ -68,38 +102,4 @@ ngs":{"N":[{"Format":"x8","Rendering":"0000007b"}]}}
 | ---------- | --------- | -------- | ---------- |
 | 5,000,000 | `JsonFormatter` | 55.368 | 1.0 |
 | 5,000,000 | `CompactJsonFormatter` | 32.223 | **0.58** |
-
-### Format details
-
-The format written by `CompactJsonFormatter` is specified generically so that implementations for other logging libraries, including _Microsoft.Extensions.Logging_, are possible if desired.
-
-The implementation in this repository obeys the specification but does not yet support the `@m` (rendered message) property, and has no need for the `@i` (event id) property.
-
-##### Payload
-
-Each event is a JSON object with event data at the top level. Any JSON property on the payload object is assumed to be a regular property of the event, apart from the reified properties below.
-
-##### Reified properties
-
-The format defines a handful of reified properties that have special meaning:
-
-| Property | Name | Description | Required? |
-| -------- | ---- | ----------- | --------- |
-| `@t`     | Timestamp | An ISO 8601 timestamp | Yes |
-| `@m`     | Message | A fully-rendered message describing the event | |
-| `@mt` | Message Template | Alternative to Message; specifies a [message template](http://messagetemplates.org) over the event's properties that provides for rendering into a textual description of the event | |
-| `@l` | Level | An implementation-specific level identifier (string or number) | Absence implies "informational"  |
-| `@x` | Exception | A language-dependent error representation potentially including backtrace | |
-| `@i` | Event id | An implementation specific event id (string or number) | |
-| `@r` | Renderings | If `@mt` includes properties with programming-language-specific formatting, an array of pre-rendered values for each such property | |
-
-The `@` sigil may be escaped at the start of a user property name by doubling, e.g. `@@name` denotes a property called `@name`.
-
-##### Batch format
-
-When events are batched into a single payload, a newline-delimited stream of JSON documents is required. Either `\n` or `\r\n` delimiters may be used.
-
-##### Versioning
-
-Versioning would be additive only, with no version identifier; implementations should treat any unrecognised reified properties as if they are user data.
 
