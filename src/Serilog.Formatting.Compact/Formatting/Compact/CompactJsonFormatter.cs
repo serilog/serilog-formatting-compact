@@ -18,7 +18,6 @@ using System.Linq;
 using Serilog.Events;
 using Serilog.Formatting.Json;
 using Serilog.Parsing;
-using Serilog.Formatting.Compact.Tests.Support;
 
 namespace Serilog.Formatting.Compact
 {
