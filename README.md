@@ -112,7 +112,7 @@ See `test/Serilog.Formatting.Compact.Tests/FormattingBenchmarks.cs`.
 
 |                           Method |     Median |    StdDev | Scaled |
 |--------------------------------- |----------: |---------: |------: |
-|                JsonFormatter1000 | 10.9891 ms | 0.4127 ms |   1.00 |
-|         CompactJsonFormatter1000 |  5.9689 ms | 0.0556 ms |   0.54 |
-|        RenderedJsonFormatter1000 | 13.5988 ms | 0.0846 ms |   1.24 |
-| RenderedCompactJsonFormatter1000 |  6.9933 ms | 0.0793 ms |   0.64 |
+|                `JsonFormatter1000` | 10.9891 ms | 0.4127 ms |   1.00 |
+|         `CompactJsonFormatter1000` |  5.9689 ms | 0.0556 ms |   0.54 |
+|        `RenderedJsonFormatter1000` | 13.5988 ms | 0.0846 ms |   1.24 |
+| `RenderedCompactJsonFormatter1000` |  6.9933 ms | 0.0793 ms |   0.64 |
