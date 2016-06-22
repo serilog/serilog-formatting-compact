@@ -1,0 +1,19 @@
+<pre><code>
+BenchmarkDotNet=v0.9.7.0
+OS=Windows
+Processor=?, ProcessorCount=8
+Frequency=2533317 ticks, Resolution=394.7394 ns, Timer=TSC
+HostCLR=CORE, Arch=64-bit RELEASE [RyuJIT]
+JitModules=?
+1.0.0-preview1-002702
+</code></pre>
+<pre><code>Type=FormattingBenchmarks  Mode=Throughput  Toolchain=Core  
+</code></pre>
+
+<table>
+<tr><th>                    Method</th><th>Median</th><th>StdDev</th><th>Scaled</th>
+</tr><tr><td>         JsonFormatter1000</td><td>11.6479 ms</td><td>0.3343 ms</td><td>1.00</td>
+</tr><tr><td>  CompactJsonFormatter1000</td><td>6.1992 ms</td><td>0.0448 ms</td><td>0.53</td>
+</tr><tr><td> RenderedJsonFormatter1000</td><td>14.9243 ms</td><td>0.1439 ms</td><td>1.28</td>
+</tr><tr><td>RenderedCompactJsonFormatter1000</td><td>7.0540 ms</td><td>0.0535 ms</td><td>0.61</td>
+</tr></table>

@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-rc-*",
   "description": "A simple, compact JSON-based event format for Serilog.",
   "authors": [ "Serilog Contributors" ],

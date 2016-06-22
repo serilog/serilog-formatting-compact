@@ -61,7 +61,7 @@ namespace Serilog.Formatting.Compact
             if (valueFormatter == null) throw new ArgumentNullException(nameof(valueFormatter));
 
             output.Write("{\"@t\":\"");
-            output.Write(logEvent.Timestamp.ToString("O"));
+            output.Write(logEvent.Timestamp.UtcDateTime.ToString("O"));
             output.Write("\",\"@m\":");
             var message = logEvent.MessageTemplate.Render(logEvent.Properties);
             JsonValueFormatter.WriteQuotedJsonString(message, output);

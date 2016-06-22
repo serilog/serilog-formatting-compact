@@ -1,11 +1,17 @@
 ﻿using System;
 using System.IO;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Serilog.Formatting.Compact.Tests.Support
 {
     static class Assertions
     {
+        static readonly JsonSerializerSettings _settings = new JsonSerializerSettings
+        {
+            DateParseHandling = DateParseHandling.None
+        };
+
         public static JObject AssertValidJson(ITextFormatter formatter, Action<ILogger> act)
         {
             var output = new StringWriter();
@@ -18,7 +24,7 @@ namespace Serilog.Formatting.Compact.Tests.Support
             var json = output.ToString();
 
             // Unfortunately this will not detect all JSON formatting issues; better than nothing however.
-            return JObject.Parse(json);
+            return JsonConvert.DeserializeObject<JObject>(json, _settings);
         }
     }
 }

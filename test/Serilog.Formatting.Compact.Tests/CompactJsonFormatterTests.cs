@@ -66,5 +66,16 @@ namespace Serilog.Formatting.Compact.Tests
             Assert.True(jobject.TryGetValue("@@Mistake", out val));
             Assert.Equal(42, val.ToObject<int>());
         }
+
+        [Fact]
+        public void TimestampIsUtc()
+        {
+            // Not possible in message templates, but accepted this way
+            var jobject = AssertValidJson(log => log.Information("Hello"));
+
+            JToken val;
+            Assert.True(jobject.TryGetValue("@t", out val));
+            Assert.EndsWith("Z", val.ToObject<string>());
+        }
     }
 }

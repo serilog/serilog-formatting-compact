@@ -7,7 +7,7 @@ A simple, compact JSON-based event format for Serilog. `CompactJsonFormatter` si
 A simple `Hello, {User}` event.
 
 ```json
-{"@t":"2016-06-07T13:44:57.8532799+10:00","@mt":"Hello, {User}","User":"nblumhardt"}
+{"@t":"2016-06-07T03:44:57.8532799Z","@mt":"Hello, {User}","User":"nblumhardt"}
 ```
 
 ### Getting started
@@ -35,7 +35,7 @@ Instead of the message template, `RenderedCompactJsonFormatter` writes the fully
 an _event id_ [generated from the message template](https://nblumhardt.com/2015/10/assigning-event-types-to-serilog-events/), into the event:
 
 ```json
-{"@t":"2016-06-07T13:44:57.8532799+10:00","@m":"Hello, \"nblumhardt\"","@i":"7a8b9c0d","User":"nblumhardt"}
+{"@t":"2016-06-07T03:44:57.8532799Z","@m":"Hello, \"nblumhardt\"","@i":"7a8b9c0d","User":"nblumhardt"}
 ```
 
 ### Format details
@@ -98,18 +98,21 @@ ngs":{"N":[{"Format":"x8","Rendering":"0000007b"}]}}
 
 **`CompactJsonFormatter`**
 
-192 bytes (**0.66**).
+187 bytes (**0.64**).
 
 ```
-{"@t":"2016-06-07T13:44:57.8532799+10:00","@mt":"Hello, {@User}, {N:x8} at {Now}
-","@r":["0000007b"],"User":{"Name":"nblumhardt","Tags":[1,2,3]},"N":123,"Now":20
-16-06-07T13:44:57.8532799+10:00}
+{"@t":"2016-06-07T03:44:57.8532799Z","@mt":"Hello, {@User}, {N:x8} at {Now}","@r
+":["0000007b"],"User":{"Name":"nblumhardt","Tags":[1,2,3]},"N":123,"Now":2016-06
+-07T13:44:57.8532799+10:00}
 ```
 
 **Formatting benchmark**
 
-| Iterations | Formatter | Time (s) | Time (rel) |
-| ---------- | --------- | -------- | ---------- |
-| 5,000,000 | `JsonFormatter` | 55.368 | 1.0 |
-| 5,000,000 | `CompactJsonFormatter` | 32.223 | **0.58** |
+See `test/Serilog.Formatting.Compact.Tests/FormattingBenchmarks.cs`.
 
+|                           Method |     Median |    StdDev | Scaled |
+|--------------------------------- |----------- |---------- |------- |
+|                JsonFormatter1000 | 10.9891 ms | 0.4127 ms |   1.00 |
+|         CompactJsonFormatter1000 |  5.9689 ms | 0.0556 ms |   0.54 |
+|        RenderedJsonFormatter1000 | 13.5988 ms | 0.0846 ms |   1.24 |
+| RenderedCompactJsonFormatter1000 |  6.9933 ms | 0.0793 ms |   0.64 |
