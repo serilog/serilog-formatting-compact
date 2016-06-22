@@ -14,18 +14,16 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using Serilog.Events;
 using Serilog.Formatting.Json;
-using Serilog.Parsing;
-using Serilog.Formatting.Compact.Tests.Support;
 
 namespace Serilog.Formatting.Compact
 {
     /// <summary>
-    /// An <see cref="ITextFormatter"/> that writes events in a compact JSON format.
+    /// An <see cref="ITextFormatter"/> that writes events in a compact JSON format, for consumption in environments 
+    /// without message template support. Message templates are rendered into text and a hashed event id is included.
     /// </summary>
-    public class CompactJsonFormatter: ITextFormatter
+    public class RenderedCompactJsonFormatter : ITextFormatter
     {
         readonly JsonValueFormatter _valueFormatter;
 
@@ -34,7 +32,7 @@ namespace Serilog.Formatting.Compact
         /// <see cref="LogEventPropertyValue"/>s on the event.
         /// </summary>
         /// <param name="valueFormatter">A value formatter, or null.</param>
-        public CompactJsonFormatter(JsonValueFormatter valueFormatter = null)
+        public RenderedCompactJsonFormatter(JsonValueFormatter valueFormatter = null)
         {
             _valueFormatter = valueFormatter ?? new JsonValueFormatter(typeTagName: "$type");
         }
@@ -64,29 +62,13 @@ namespace Serilog.Formatting.Compact
 
             output.Write("{\"@t\":\"");
             output.Write(logEvent.Timestamp.ToString("O"));
-            output.Write("\",\"@mt\":");
-            JsonValueFormatter.WriteQuotedJsonString(logEvent.MessageTemplate.Text, output);
-
-            var tokensWithFormat = logEvent.MessageTemplate.Tokens
-                .OfType<PropertyToken>()
-                .Where(pt => pt.Format != null);
-
-            // Better not to allocate an array in the 99.9% of cases where this is false
-            // ReSharper disable once PossibleMultipleEnumeration
-            if (tokensWithFormat.Any())
-            {
-                output.Write(",\"@r\":[");
-                var delim = "";
-                foreach (var r in tokensWithFormat)
-                {
-                    output.Write(delim);
-                    delim = ",";
-                    var space = new StringWriter();
-                    r.Render(logEvent.Properties, space);
-                    JsonValueFormatter.WriteQuotedJsonString(space.ToString(), output);
-                }
-                output.Write(']');
-            }
+            output.Write("\",\"@m\":");
+            var message = logEvent.MessageTemplate.Render(logEvent.Properties);
+            JsonValueFormatter.WriteQuotedJsonString(message, output);
+            output.Write(",\"@i\":\"");
+            var id = EventIdHash.Compute(logEvent.MessageTemplate.Text);
+            output.Write(id.ToString("x8"));
+            output.Write('"');
 
             if (logEvent.Level != LogEventLevel.Information)
             {
