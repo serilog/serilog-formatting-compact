@@ -110,9 +110,9 @@ ngs":{"N":[{"Format":"x8","Rendering":"0000007b"}]}}
 
 See `test/Serilog.Formatting.Compact.Tests/FormattingBenchmarks.cs`.
 
-|                           Method |     Median |    StdDev | Scaled |
-|--------------------------------- |----------: |---------: |------: |
-|                `JsonFormatter1000` | 10.9891 ms | 0.4127 ms |   1.00 |
-|         `CompactJsonFormatter1000` |  5.9689 ms | 0.0556 ms |   0.54 |
-|        `RenderedJsonFormatter1000` | 13.5988 ms | 0.0846 ms |   1.24 |
-| `RenderedCompactJsonFormatter1000` |  6.9933 ms | 0.0793 ms |   0.64 |
+|                           Formatter |     Median (1000 iterations) |    StdDev | Scaled |
+|:-------------------------------- |----------: |---------: |------: |
+|                `JsonFormatter` | 10.9891 ms | 0.4127 ms |   1.00 |
+|         `CompactJsonFormatter` |  5.9689 ms | 0.0556 ms |   0.54 |
+|        `RenderedJsonFormatter` | 13.5988 ms | 0.0846 ms |   1.24 |
+| `RenderedCompactJsonFormatter` |  6.9933 ms | 0.0793 ms |   0.64 |
