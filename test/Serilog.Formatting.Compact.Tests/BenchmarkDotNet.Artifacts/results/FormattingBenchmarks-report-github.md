@@ -11,9 +11,10 @@ JitModules=?
 Type=FormattingBenchmarks  Mode=Throughput  Toolchain=Core  
 
 ```
-                           Method |     Median |    StdDev | Scaled |
---------------------------------- |----------- |---------- |------- |
-                JsonFormatter1000 | 11.6479 ms | 0.3343 ms |   1.00 |
-         CompactJsonFormatter1000 |  6.1992 ms | 0.0448 ms |   0.53 |
-        RenderedJsonFormatter1000 | 14.9243 ms | 0.1439 ms |   1.28 |
- RenderedCompactJsonFormatter1000 |  7.0540 ms | 0.0535 ms |   0.61 |
+                       Method |     Median |    StdDev | Scaled |
+----------------------------- |----------- |---------- |------- |
+                JsonFormatter | 12.4016 us | 0.8737 us |   1.00 |
+         CompactJsonFormatter |  6.0621 us | 0.0359 us |   0.49 |
+        RenderedJsonFormatter | 15.6869 us | 0.9942 us |   1.26 |
+ RenderedCompactJsonFormatter |  6.8628 us | 0.4178 us |   0.55 |
+| 0.0535 ms |   0.61 |

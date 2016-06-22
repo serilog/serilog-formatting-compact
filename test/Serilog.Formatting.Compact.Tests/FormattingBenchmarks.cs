@@ -27,37 +27,36 @@ namespace Serilog.Formatting.Compact.Tests
             _evt = collectorSink.LastCollected;
         }
 
-        void Run(ITextFormatter formatter, int iterations)
+        StringWriter _buffer;
+
+        [Setup]
+        public void InitBuffer()
         {
-            for (var i = 0; i < iterations; ++i)
-            {
-                var sw = new StringWriter();
-                formatter.Format(_evt, sw);
-            }
+            _buffer = new StringWriter();
         }
 
         [Benchmark(Baseline = true)]
-        public void JsonFormatter1000()
+        public void JsonFormatter()
         {
-            Run(_jsonFormatter, 1000);
+            _jsonFormatter.Format(_evt, _buffer);
         }
 
         [Benchmark]
-        public void CompactJsonFormatter1000()
+        public void CompactJsonFormatter()
         {
-            Run(_compactFormatter, 1000);
+            _compactFormatter.Format(_evt, _buffer);
         }
 
         [Benchmark]
-        public void RenderedJsonFormatter1000()
+        public void RenderedJsonFormatter()
         {
-            Run(_renderedJsonFormatter, 1000);
+            _renderedJsonFormatter.Format(_evt, _buffer);
         }
 
         [Benchmark]
-        public void RenderedCompactJsonFormatter1000()
+        public void RenderedCompactJsonFormatter()
         {
-            Run(_renderedCompactFormatter, 1000);
+            _renderedCompactFormatter.Format(_evt, _buffer);
         }
     }
 }
