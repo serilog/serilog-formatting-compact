@@ -72,6 +72,8 @@ Versioning would be additive only, with no version identifier; implementations s
 
 ### Comparison
 
+The output and benchmarks below compare the compact JSON formatter with Serilog's built-in `JsonFormatter`.
+
 **Event**
 
 ```csharp
