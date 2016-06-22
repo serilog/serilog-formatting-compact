@@ -26,11 +26,17 @@ Log.Logger = new LoggerConfiguration()
   .CreateLogger();
 ```
 
+### Rendered events
+
+`CompactJsonFormatter` will preserve the message template, properties, and formatting information so that the rendered message can be created at a later point. When the
+JSON is intended for consumption in an environment without message template rendering, `RenderedCompactJsonFormatter` can be used instead.
+
+Instead of the message template, `RenderedCompactJsonFormatter` writes the fully-rendered message, as well as
+an _event id_ [generated from the message template](https://nblumhardt.com/2015/10/assigning-event-types-to-serilog-events/), into the event.
+
 ### Format details
 
-The format written by `CompactJsonFormatter` is specified generically so that implementations for other logging libraries, including _Microsoft.Extensions.Logging_, are possible if desired.
-
-The implementation in this repository obeys the specification but does not yet support the `@m` (rendered message) property, and has no need for the `@i` (event id) property.
+The format written by the compact formatters is specified generically so that implementations for other logging libraries, including _Microsoft.Extensions.Logging_, are possible if desired.
 
 ##### Payload
 
