@@ -32,7 +32,11 @@ Log.Logger = new LoggerConfiguration()
 JSON is intended for consumption in an environment without message template rendering, `RenderedCompactJsonFormatter` can be used instead.
 
 Instead of the message template, `RenderedCompactJsonFormatter` writes the fully-rendered message, as well as
-an _event id_ [generated from the message template](https://nblumhardt.com/2015/10/assigning-event-types-to-serilog-events/), into the event.
+an _event id_ [generated from the message template](https://nblumhardt.com/2015/10/assigning-event-types-to-serilog-events/), into the event:
+
+```json
+{"@t":"2016-06-07T13:44:57.8532799+10:00","@m":"Hello, \"nblumhardt\"","@i":"7a8b9c0d","User":"nblumhardt"}
+```
 
 ### Format details
 
