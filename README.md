@@ -87,9 +87,7 @@ Log.Information("Hello, {@User}, {N:x8} at {Now}",
   DateTime.Now);
 ```
 
-**Default `JsonFormatter`**
-
-292 bytes.
+**Default `JsonFormatter`** 292 bytes
 
 ```
 {"Timestamp":"2016-06-07T13:44:57.8532799+10:00","Level":"Information","MessageT
@@ -98,9 +96,7 @@ rdt","Tags":[1,2,3]},"N":123,"Now":"2016-06-07T13:44:57.8532799+10:00"},"Renderi
 ngs":{"N":[{"Format":"x8","Rendering":"0000007b"}]}}
 ```
 
-**`CompactJsonFormatter`**
-
-187 bytes (**0.64**).
+**`CompactJsonFormatter`** 187 bytes (0.64)
 
 ```
 {"@t":"2016-06-07T03:44:57.8532799Z","@mt":"Hello, {@User}, {N:x8} at {Now}","@r
