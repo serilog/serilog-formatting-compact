@@ -3,7 +3,7 @@
   "dependencies": {
     "Serilog.Formatting.Compact": { "target": "project" },
     "xunit": "2.1.0",
-    "dotnet-test-xunit": "1.0.0-rc2-build10015",
+    "dotnet-test-xunit": "1.0.0-rc2-build10025",
     "Newtonsoft.Json": "8.0.3",
     "BenchmarkDotNet": "0.9.7-beta"
   },
@@ -11,12 +11,12 @@
     "keyFile": "../../assets/Serilog.snk"
   },
   "frameworks": {
-    "net4.5.2": { },
+    "net4.5.2": {}, 
     "netcoreapp1.0": {
       "dependencies": {
         "Microsoft.NETCore.App": {
           "type": "platform",
-          "version": "1.0.0-preview3-003161"
+          "version": "1.0.0"
         }
       },
       "imports": [
