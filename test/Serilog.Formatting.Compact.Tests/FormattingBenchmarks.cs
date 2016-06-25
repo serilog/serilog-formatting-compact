@@ -7,6 +7,7 @@ using Serilog.Formatting.Json;
 
 namespace Serilog.Formatting.Compact.Tests
 {
+    [Config(typeof(FormattingBenchmarksConfig))]
     public class FormattingBenchmarks
     {
         readonly LogEvent _evt;
