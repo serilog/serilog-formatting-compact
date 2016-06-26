@@ -12,6 +12,8 @@ build_script:
 test: off
 artifacts:
 - path: artifacts/Serilog.*.nupkg
+- path: BenchmarkDotNet.Artifacts\results\**\*
+  name: benchmark-results
 deploy:
 - provider: NuGet
   api_key:
