@@ -22,8 +22,17 @@ The formatter is used in conjunction with sinks that accept `ITextFormatter`. Fo
 
 ```csharp
 Log.Logger = new LoggerConfiguration()
-  .WriteTo.Sink(new RollingFileSink("./logs/myapp.txt", new CompactJsonFormatter(), null, null))
+  .WriteTo.RollingFile(new CompactJsonFormatter(), "./logs/myapp.json")
   .CreateLogger();
+```
+
+To specify the formatter in XML `<appSettings>` provide its assembly-qualified type name:
+
+```xml
+<appSettings>
+  <add key="serilog:write-to:RollingFile.pathFormat" value="./logs/myapp.json" />
+  <add key="serilog:write-to:RollingFile.formatter"
+       value="Serilog.Formattting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact" />
 ```
 
 ### Rendered events
