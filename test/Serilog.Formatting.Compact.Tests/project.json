@@ -11,7 +11,7 @@
     "keyFile": "../../assets/Serilog.snk"
   },
   "frameworks": {
-    "net4.5.2": {}, 
+    "net4.5.2": {},
     "netcoreapp1.0": {
       "dependencies": {
         "Microsoft.NETCore.App": {

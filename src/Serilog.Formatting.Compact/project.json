@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-rc-*",
+  "version": "1.0.0-*",
   "description": "A simple, compact JSON-based event format for Serilog.",
   "authors": [ "Serilog Contributors" ],
   "packOptions": {
@@ -9,7 +9,7 @@
     "iconUrl": "http://serilog.net/images/serilog-community-nuget.png"
   },
   "dependencies": {
-    "Serilog": "2.0.0-rc-633"
+    "Serilog": "2.0.0"
   },
   "buildOptions": {
     "keyFile": "../../assets/Serilog.snk",
