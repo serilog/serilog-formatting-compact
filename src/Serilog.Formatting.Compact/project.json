@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-*",
+  "version": "1.0.1-*",
   "description": "A simple, compact JSON-based event format for Serilog.",
   "authors": [ "Serilog Contributors" ],
   "packOptions": {
