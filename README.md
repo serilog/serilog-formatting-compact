@@ -30,6 +30,7 @@ To specify the formatter in XML `<appSettings>` provide its assembly-qualified t
 
 ```xml
 <appSettings>
+  <add key="serilog:using:RollingFile" value="Serilog.Sinks.RollingFile" />
   <add key="serilog:write-to:RollingFile.pathFormat" value="./logs/myapp.json" />
   <add key="serilog:write-to:RollingFile.formatter"
        value="Serilog.Formattting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact" />
