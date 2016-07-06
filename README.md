@@ -26,7 +26,7 @@ Log.Logger = new LoggerConfiguration()
   .CreateLogger();
 ```
 
-To specify the formatter in XML `<appSettings>` provide its assembly-qualified type name:
+To specify the formatter in XML `<appSettings>` provide its assembly-qualified type name (**requires Serilog 2.1+**):
 
 ```xml
 <appSettings>
