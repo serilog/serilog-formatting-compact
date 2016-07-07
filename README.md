@@ -74,7 +74,7 @@ The `@` sigil may be escaped at the start of a user property name by doubling, e
 
 ##### Batch format
 
-When events are batched into a single payload, a newline-delimited stream of JSON documents is required. Either `\n` or `\r\n` delimiters may be used.
+When events are batched into a single payload, a newline-delimited stream of JSON documents is required. Either `\n` or `\r\n` delimiters may be used. Batches of newline-separated compact JSON events can use the (unofficial) MIME type `application/vnd.serilog.clef`.
 
 ##### Versioning
 
