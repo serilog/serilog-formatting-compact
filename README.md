@@ -124,3 +124,8 @@ See `test/Serilog.Formatting.Compact.Tests/FormattingBenchmarks.cs`.
 |         `CompactJsonFormatter` |  6.0315 &micro;s | 0.0429 &micro;s |   0.53 |
 |        `RenderedJsonFormatter` | 13.7585 &micro;s | 0.1194 &micro;s |   1.22 |
 | `RenderedCompactJsonFormatter` |  7.0680 &micro;s | 0.0605 &micro;s |   0.63 |
+
+### Compiling
+
+Opening serilog-formatting-compact.sln requires VS2015 Update 3 with the .NET Core tooling to be installed.  
+See: https://www.microsoft.com/net/core#windows
