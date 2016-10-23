@@ -4,9 +4,9 @@
   "authors": [ "Serilog Contributors" ],
   "packOptions": {
     "tags": [ "serilog", "json" ],
-    "projectUrl": "https://github.com/nblumhardt/serilog-formatters-compact",
+    "projectUrl": "https://github.com/serilog/serilog-formatting-compact",
     "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
-    "iconUrl": "http://serilog.net/images/serilog-community-nuget.png"
+    "iconUrl": "http://serilog.net/images/serilog-extension-nuget.png"
   },
   "dependencies": {
     "Serilog": "2.0.0"
