@@ -26,13 +26,13 @@ Log.Logger = new LoggerConfiguration()
   .CreateLogger();
 ```
 
-To specify the formatter in XML `<appSettings>` provide its assembly-qualified type name (**requires Serilog 2.1+**):
+To specify the formatter in XML `<appSettings>` provide its assembly-qualified type name:
 
 ```xml
 <appSettings>
-  <add key="serilog:using:RollingFile" value="Serilog.Sinks.RollingFile" />
-  <add key="serilog:write-to:RollingFile.pathFormat" value="./logs/myapp.json" />
-  <add key="serilog:write-to:RollingFile.formatter"
+  <add key="serilog:using:File" value="Serilog.Sinks.RollingFile" />
+  <add key="serilog:write-to:File.path" value="./logs/myapp.json" />
+  <add key="serilog:write-to:File.formatter"
        value="Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact" />
 ```
 
