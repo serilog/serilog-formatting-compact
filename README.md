@@ -18,11 +18,11 @@ Install from [NuGet](https://nuget.org/packages/Serilog.Formatting.Compact):
 Install-Package Serilog.Formatting.Compact
 ```
 
-The formatter is used in conjunction with sinks that accept `ITextFormatter`. For example, the [rolling file](https://github.com/serilog/serilog-sinks-rollingfile) sink:
+The formatter is used in conjunction with sinks that accept `ITextFormatter`. For example, the [file](https://github.com/serilog/serilog-sinks-file) sink:
 
 ```csharp
 Log.Logger = new LoggerConfiguration()
-  .WriteTo.RollingFile(new CompactJsonFormatter(), "./logs/myapp.json")
+  .WriteTo.File(new CompactJsonFormatter(), "./logs/myapp.json")
   .CreateLogger();
 ```
 
