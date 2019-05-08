@@ -129,7 +129,7 @@ See `test/Serilog.Formatting.Compact.Tests/FormattingBenchmarks.cs`.
 
 Several tools are available for working with the CLEF format.
 
-back into Serilog `LogEvent`s
  * **[`clef-tool`](https://github.com/datalust/clef-tool)** - a CLI application for processing CLEF files
  * **[Compact Log Format Viewer](https://github.com/warrenbuckley/Compact-Log-Format-Viewer)** - a cross-platform viewer for CLEF JSON files
- * **[_Serilog.Formatting.Compact.Reader_](https://github.com/serilog/serilog-formatting-compact-reader)** - convert CLEF JSON documents  
+ * **[_Serilog.Formatting.Compact.Reader_](https://github.com/serilog/serilog-formatting-compact-reader)** - convert CLEF JSON documents back into Serilog `LogEvent`s
+ 
