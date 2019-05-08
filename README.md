@@ -125,7 +125,11 @@ See `test/Serilog.Formatting.Compact.Tests/FormattingBenchmarks.cs`.
 |        `RenderedJsonFormatter` | 13.7585 &micro;s | 0.1194 &micro;s |   1.22 |
 | `RenderedCompactJsonFormatter` |  7.0680 &micro;s | 0.0605 &micro;s |   0.63 |
 
-### Compiling
+### Tools
 
-Opening serilog-formatting-compact.sln requires VS2015 Update 3 with the .NET Core tooling to be installed.  
-See: https://www.microsoft.com/net/core#windows
+Several tools are available for working with the CLEF format.
+
+back into Serilog `LogEvent`s
+ * **[`clef-tool`](https://github.com/datalust/clef-tool)** - a CLI application for processing CLEF files
+ * **[Compact Log Format Viewer](https://github.com/warrenbuckley/Compact-Log-Format-Viewer)** - a cross-platform viewer for CLEF JSON files
+ * **[_Serilog.Formatting.Compact.Reader_](https://github.com/serilog/serilog-formatting-compact-reader)** - convert CLEF JSON documents  
