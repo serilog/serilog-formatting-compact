@@ -25,15 +25,33 @@ Log.Logger = new LoggerConfiguration()
   .WriteTo.File(new CompactJsonFormatter(), "./logs/myapp.json")
   .CreateLogger();
 ```
-
+#### XML `<appSettings>` configuration
 To specify the formatter in XML `<appSettings>` provide its assembly-qualified type name:
 
 ```xml
 <appSettings>
-  <add key="serilog:using:File" value="Serilog.Sinks.RollingFile" />
+  <add key="serilog:using:File" value="Serilog.Sinks.File" />
   <add key="serilog:write-to:File.path" value="./logs/myapp.json" />
   <add key="serilog:write-to:File.formatter"
        value="Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact" />
+```
+#### JSON `appsettings.json` configuration
+To specify formatter in json `appsettings.json` provide its assembly-qualified type name:
+
+```json
+{
+  "Serilog": {
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": {
+          "path": "./logs/myapp.json",
+          "formatter": "Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact"
+        }
+      }
+    ]
+  }
+}
 ```
 
 ### Rendered events
