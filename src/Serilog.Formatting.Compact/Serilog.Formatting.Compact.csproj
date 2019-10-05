@@ -15,10 +15,7 @@
     <PackageTags>serilog;json</PackageTags>
     <PackageIconUrl>http://serilog.net/images/serilog-extension-nuget.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/serilog/serilog-formatting-compact</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
