@@ -1,4 +1,4 @@
-# Serilog.Formatting.Compact [![Build status](https://ci.appveyor.com/api/projects/status/ch5il2airviylofn?svg=true)](https://ci.appveyor.com/project/serilog/serilog-formatting-compact) [![NuGet](https://img.shields.io/nuget/vpre/Serilog.Formatting.Compact.svg)](https://nuget.org/packages/Serilog.Formatting.Compact)
+# Serilog.Formatting.Compact [![Build status](https://ci.appveyor.com/api/projects/status/ch5il2airviylofn?svg=true)](https://ci.appveyor.com/project/serilog/serilog-formatting-compact) [![NuGet](https://img.shields.io/nuget/v/Serilog.Formatting.Compact.svg)](https://nuget.org/packages/Serilog.Formatting.Compact)
 
 A simple, compact JSON-based event format for Serilog. `CompactJsonFormatter` significantly reduces the byte count of small log events when compared with Serilog's default `JsonFormatter`, while remaining human-readable. It achieves this through shorter built-in property names, a leaner format, and by excluding redundant information.
 
@@ -15,15 +15,43 @@ A simple `Hello, {User}` event.
 Install from [NuGet](https://nuget.org/packages/Serilog.Formatting.Compact):
 
 ```powershell
-Install-Package Serilog.Formatting.Compact -Pre
+Install-Package Serilog.Formatting.Compact
 ```
 
-The formatter is used in conjunction with sinks that accept `ITextFormatter`. For example, the [rolling file](https://github.com/serilog/serilog-sinks-rollingfile) sink:
+The formatter is used in conjunction with sinks that accept `ITextFormatter`. For example, the [file](https://github.com/serilog/serilog-sinks-file) sink:
 
 ```csharp
 Log.Logger = new LoggerConfiguration()
-  .WriteTo.Sink(new RollingFileSink("./logs/myapp.txt", new CompactJsonFormatter(), null, null))
+  .WriteTo.File(new CompactJsonFormatter(), "./logs/myapp.json")
   .CreateLogger();
+```
+#### XML `<appSettings>` configuration
+To specify the formatter in XML `<appSettings>` provide its assembly-qualified type name:
+
+```xml
+<appSettings>
+  <add key="serilog:using:File" value="Serilog.Sinks.File" />
+  <add key="serilog:write-to:File.path" value="./logs/myapp.json" />
+  <add key="serilog:write-to:File.formatter"
+       value="Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact" />
+```
+#### JSON `appsettings.json` configuration
+To specify formatter in json `appsettings.json` provide its assembly-qualified type name:
+
+```json
+{
+  "Serilog": {
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": {
+          "path": "./logs/myapp.json",
+          "formatter": "Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact"
+        }
+      }
+    ]
+  }
+}
 ```
 
 ### Rendered events
@@ -58,13 +86,13 @@ The format defines a handful of reified properties that have special meaning:
 | `@l` | Level | An implementation-specific level identifier (string or number) | Absence implies "informational"  |
 | `@x` | Exception | A language-dependent error representation potentially including backtrace | |
 | `@i` | Event id | An implementation specific event id (string or number) | |
-| `@r` | Renderings | If `@mt` includes properties with programming-language-specific formatting, an array of pre-rendered values for each such property | |
+| `@r` | Renderings | If `@mt` includes tokens with programming-language-specific formatting, an array of pre-rendered values for each such token | May be omitted; if present, the count of renderings must match the count of formatted tokens exactly |
 
 The `@` sigil may be escaped at the start of a user property name by doubling, e.g. `@@name` denotes a property called `@name`.
 
 ##### Batch format
 
-When events are batched into a single payload, a newline-delimited stream of JSON documents is required. Either `\n` or `\r\n` delimiters may be used.
+When events are batched into a single payload, a newline-delimited stream of JSON documents is required. Either `\n` or `\r\n` delimiters may be used. Batches of newline-separated compact JSON events can use the (unofficial) MIME type `application/vnd.serilog.clef`.
 
 ##### Versioning
 
@@ -110,7 +138,16 @@ See `test/Serilog.Formatting.Compact.Tests/FormattingBenchmarks.cs`.
 
 |                      Formatter |    Median  |    StdDev | Scaled |
 |:------------------------------ |----------: |---------: |------: |
-|                `JsonFormatter` | 11.2775 us | 0.0682 us |   1.00 |
-|         `CompactJsonFormatter` |  6.0315 us | 0.0429 us |   0.53 |
-|        `RenderedJsonFormatter` | 13.7585 us | 0.1194 us |   1.22 |
-| `RenderedCompactJsonFormatter` |  7.0680 us | 0.0605 us |   0.63 |
+|                `JsonFormatter` | 11.2775 &micro;s | 0.0682 &micro;s |   1.00 |
+|         `CompactJsonFormatter` |  6.0315 &micro;s | 0.0429 &micro;s |   0.53 |
+|        `RenderedJsonFormatter` | 13.7585 &micro;s | 0.1194 &micro;s |   1.22 |
+| `RenderedCompactJsonFormatter` |  7.0680 &micro;s | 0.0605 &micro;s |   0.63 |
+
+### Tools
+
+Several tools are available for working with the CLEF format.
+
+ * **[`clef-tool`](https://github.com/datalust/clef-tool)** - a CLI application for processing CLEF files
+ * **[Compact Log Format Viewer](https://github.com/warrenbuckley/Compact-Log-Format-Viewer)** - a cross-platform viewer for CLEF JSON files
+ * **[_Serilog.Formatting.Compact.Reader_](https://github.com/serilog/serilog-formatting-compact-reader)** - convert CLEF JSON documents back into Serilog `LogEvent`s
+ 
