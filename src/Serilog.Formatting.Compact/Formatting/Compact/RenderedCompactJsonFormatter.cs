@@ -26,15 +26,25 @@ namespace Serilog.Formatting.Compact
     public class RenderedCompactJsonFormatter : ITextFormatter
     {
         readonly JsonValueFormatter _valueFormatter;
+        readonly Func<DateTimeOffset, string> _timeStampFormatter;
 
         /// <summary>
         /// Construct a <see cref="CompactJsonFormatter"/>, optionally supplying a formatter for
         /// <see cref="LogEventPropertyValue"/>s on the event.
         /// </summary>
         /// <param name="valueFormatter">A value formatter, or null.</param>
-        public RenderedCompactJsonFormatter(JsonValueFormatter valueFormatter = null)
+        /// <param name="useLocalTime">true if timestamps should be logged in local time with UTC offset; false if timestamps should continue to be logged in UTC.</param>
+        public RenderedCompactJsonFormatter(JsonValueFormatter valueFormatter = null, bool useLocalTime = false)
         {
             _valueFormatter = valueFormatter ?? new JsonValueFormatter(typeTagName: "$type");
+            if (!useLocalTime)
+            {
+                _timeStampFormatter = dto => dto.UtcDateTime.ToString("O");
+            }
+            else
+            {
+                _timeStampFormatter = dto => dto.ToString("O");
+            }
         }
 
         /// <summary>
@@ -44,7 +54,7 @@ namespace Serilog.Formatting.Compact
         /// <param name="output">The output.</param>
         public void Format(LogEvent logEvent, TextWriter output)
         {
-            FormatEvent(logEvent, output, _valueFormatter);
+            FormatEvent(logEvent, output, _valueFormatter, _timeStampFormatter);
             output.WriteLine();
         }
 
@@ -54,14 +64,15 @@ namespace Serilog.Formatting.Compact
         /// <param name="logEvent">The event to format.</param>
         /// <param name="output">The output.</param>
         /// <param name="valueFormatter">A value formatter for <see cref="LogEventPropertyValue"/>s on the event.</param>
-        public static void FormatEvent(LogEvent logEvent, TextWriter output, JsonValueFormatter valueFormatter)
+        /// <param name="timeStampFormatter">A delegate that formats the supplied <see cref="DateTimeOffset"/> as desired.</param>
+        public static void FormatEvent(LogEvent logEvent, TextWriter output, JsonValueFormatter valueFormatter, Func<DateTimeOffset, string> timeStampFormatter)
         {
             if (logEvent == null) throw new ArgumentNullException(nameof(logEvent));
             if (output == null) throw new ArgumentNullException(nameof(output));
             if (valueFormatter == null) throw new ArgumentNullException(nameof(valueFormatter));
 
             output.Write("{\"@t\":\"");
-            output.Write(logEvent.Timestamp.UtcDateTime.ToString("O"));
+            output.Write(timeStampFormatter(logEvent.Timestamp));
             output.Write("\",\"@m\":");
             var message = logEvent.MessageTemplate.Render(logEvent.Properties);
             JsonValueFormatter.WriteQuotedJsonString(message, output);

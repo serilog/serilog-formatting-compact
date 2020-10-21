@@ -2,15 +2,16 @@
 using Newtonsoft.Json.Linq;
 using Xunit;
 using Serilog.Formatting.Compact.Tests.Support;
-
+using Serilog.Events;
+using System.Collections.Generic;
 
 namespace Serilog.Formatting.Compact.Tests
 {
     public class RenderedCompactJsonFormatterTests
     {
-        JObject AssertValidJson(Action<ILogger> act)
+        JObject AssertValidJson(Action<ILogger> act, bool useLocalTime = false)
         {
-            return Assertions.AssertValidJson(new RenderedCompactJsonFormatter(), act);
+            return Assertions.AssertValidJson(new RenderedCompactJsonFormatter(useLocalTime: useLocalTime), act);
         }
 
         [Fact]
@@ -74,6 +75,30 @@ namespace Serilog.Formatting.Compact.Tests
             JToken val;
             Assert.True(jobject.TryGetValue("@@Mistake", out val));
             Assert.Equal(42, val.ToObject<int>());
+        }
+
+        [Fact]
+        public void UtcTimestampsAreOutputByDefault()
+        {
+            var testDateTime = new DateTimeOffset(2020, 10, 21, 12, 30, 30, TimeSpan.FromHours(-6));
+            var logEvent = new LogEvent(testDateTime, LogEventLevel.Information, null, MessageTemplate.Empty, new List<LogEventProperty>());
+            var jobject = AssertValidJson(log => log.Write(logEvent));
+
+            JToken t;
+            Assert.True(jobject.TryGetValue("@t", out t));
+            Assert.Equal("2020-10-21T18:30:30.0000000Z", t.Value<string>());
+        }
+
+        [Fact]
+        public void UtcTimestampsAreOutputInLocalTimeWhenConfigured()
+        {
+            var testDateTime = new DateTimeOffset(2020, 10, 21, 12, 30, 30, TimeSpan.FromHours(-6));
+            var logEvent = new LogEvent(testDateTime, LogEventLevel.Information, null, MessageTemplate.Empty, new List<LogEventProperty>());
+            var jobject = AssertValidJson(log => log.Write(logEvent), true);
+
+            JToken t;
+            Assert.True(jobject.TryGetValue("@t", out t));
+            Assert.Equal("2020-10-21T12:30:30.0000000-06:00", t.Value<string>());
         }
     }
 }
