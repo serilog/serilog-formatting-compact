@@ -30,7 +30,7 @@ namespace Serilog.Formatting.Compact.Tests
 
         StringWriter _buffer;
 
-        [Setup]
+        [GlobalSetup]
         public void InitBuffer()
         {
             _buffer = new StringWriter();
