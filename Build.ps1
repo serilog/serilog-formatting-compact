@@ -1,29 +1,39 @@
+Write-Output "build: Build started"
+
 Push-Location $PSScriptRoot
 
-if(Test-Path .\artifacts) { Remove-Item .\artifacts -Force -Recurse }
-
-& dotnet restore --no-cache
-
-$branch = @{ $true = $env:APPVEYOR_REPO_BRANCH; $false = $(git symbolic-ref --short -q HEAD) }[$env:APPVEYOR_REPO_BRANCH -ne $NULL];
-$revision = @{ $true = "{0:00000}" -f [convert]::ToInt32("0" + $env:APPVEYOR_BUILD_NUMBER, 10); $false = "local" }[$env:APPVEYOR_BUILD_NUMBER -ne $NULL];
-$suffix = @{ $true = ""; $false = "$branch-$revision"}[$branch -eq "master" -and $revision -ne "local"]
-
-foreach ($src in ls src/Serilog.*) {
-    Push-Location $src
-
-    & dotnet pack -c Release -o ..\..\.\artifacts --version-suffix=$suffix
-    if($LASTEXITCODE -ne 0) { exit 1 }    
-
-    Pop-Location
+if(Test-Path .\artifacts) {
+    Write-Output "build: Cleaning .\artifacts"
+    Remove-Item .\artifacts -Force -Recurse
 }
 
-foreach ($test in ls test/Serilog.*.Tests) {
-    Push-Location $test
+$branch = @{ $true = $env:APPVEYOR_REPO_BRANCH; $false = $(git symbolic-ref --short -q HEAD) }[$NULL -ne $env:APPVEYOR_REPO_BRANCH];
+$revision = @{ $true = "{0:00000}" -f [convert]::ToInt32("0" + $env:APPVEYOR_BUILD_NUMBER, 10); $false = "local" }[$NULL -ne $env:APPVEYOR_BUILD_NUMBER];
+$suffix = @{ $true = ""; $false = "$($branch.Substring(0, [math]::Min(10,$branch.Length)))-$revision"}[$branch -eq "main" -and $revision -ne "local"]
+$commitHash = $(git rev-parse --short HEAD)
+$buildSuffix = @{ $true = "$($suffix)-$($commitHash)"; $false = "$($branch)-$($commitHash)" }[$suffix -ne ""]
 
-    & dotnet test -c Release
-    if($LASTEXITCODE -ne 0) { exit 2 }
+Write-Output "build: Package version suffix is $suffix"
+Write-Output "build: Build version suffix is $buildSuffix"
 
-    Pop-Location
+& dotnet build --configuration Release --version-suffix=$buildSuffix /p:ContinuousIntegrationBuild=true
+
+if($LASTEXITCODE -ne 0) { throw 'build failed' }
+
+if($suffix) {
+    & dotnet pack src\Serilog.Formatting.Compact --configuration Release --no-build --no-restore -o artifacts --version-suffix=$suffix
+} else {
+    & dotnet pack src\Serilog.Formatting.Compact --configuration Release --no-build --no-restore -o artifacts
 }
 
-Pop-Location
+if($LASTEXITCODE -ne 0) { throw 'pack failed' }
+
+Write-Output "build: Testing"
+
+& dotnet test  test\Serilog.Formatting.Compact.Tests --configuration Release --no-build --no-restore
+
+if($LASTEXITCODE -ne 0) { throw 'unit tests failed' }
+
+# & dotnet test  test\Serilog.Formatting.Compact.ApprovalTests --configuration Release --no-build --no-restore
+
+# if($LASTEXITCODE -ne 0) { throw 'approval tests failed' }
