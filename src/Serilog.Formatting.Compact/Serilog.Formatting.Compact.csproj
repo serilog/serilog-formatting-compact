@@ -4,7 +4,7 @@
     <Description>A simple, compact JSON-based event format for Serilog.</Description>
     <VersionPrefix>1.1.0</VersionPrefix>
     <Authors>Serilog Contributors</Authors>
-    <TargetFrameworks>net452;netstandard1.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Serilog.Formatting.Compact</AssemblyName>
