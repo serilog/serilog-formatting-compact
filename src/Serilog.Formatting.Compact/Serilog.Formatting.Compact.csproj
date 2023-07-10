@@ -8,18 +8,15 @@
         <TargetFrameworks>$(TargetFrameworks);netstandard2.1;netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <AssemblyName>Serilog.Formatting.Compact</AssemblyName>
         <AssemblyOriginatorKeyFile>../../assets/Serilog.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
         <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
         <PackageIcon>serilog-extension-nuget.png</PackageIcon>
-        <PackageId>Serilog.Formatting.Compact</PackageId>
         <PackageTags>serilog;json</PackageTags>
         <!--<PackageIconUrl>http://serilog.net/images/serilog-extension-nuget.png</PackageIconUrl>-->
         <PackageProjectUrl>https://github.com/serilog/serilog-formatting-compact</PackageProjectUrl>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Title>Serilog.Formatting.Compact</Title>
         <RepositoryUrl>https://github.com/serilog/serilog-formatting-compact</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <AnalysisLevel>6.0-recommended</AnalysisLevel>
