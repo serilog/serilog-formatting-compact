@@ -23,7 +23,6 @@
         <RepositoryUrl>https://github.com/serilog/serilog-formatting-compact</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <AnalysisLevel>6.0-recommended</AnalysisLevel>
-        <PackageIcon></PackageIcon>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
