@@ -33,7 +33,3 @@ Write-Output "build: Testing"
 & dotnet test  test\Serilog.Formatting.Compact.Tests --configuration Release --no-build --no-restore
 
 if($LASTEXITCODE -ne 0) { throw 'unit tests failed' }
-
-# & dotnet test  test\Serilog.Formatting.Compact.ApprovalTests --configuration Release --no-build --no-restore
-
-# if($LASTEXITCODE -ne 0) { throw 'approval tests failed' }
