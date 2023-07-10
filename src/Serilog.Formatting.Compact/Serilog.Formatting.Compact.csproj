@@ -2,9 +2,10 @@
 
     <PropertyGroup>
         <Description>A simple, compact JSON-based event format for Serilog.</Description>
-        <VersionPrefix>3.0.0</VersionPrefix>
+        <VersionPrefix>2.0.0</VersionPrefix>
         <Authors>Serilog Contributors</Authors>
-        <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT'">net462;net471</TargetFrameworks>
+        <TargetFrameworks>$(TargetFrameworks);netstandard2.1;netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <AssemblyName>Serilog.Formatting.Compact</AssemblyName>
