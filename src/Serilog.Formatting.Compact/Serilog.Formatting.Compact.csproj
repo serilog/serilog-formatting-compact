@@ -11,6 +11,7 @@
         <AssemblyOriginatorKeyFile>../../assets/Serilog.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
         <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+        <!--<PackageIconUrl>http://serilog.net/images/serilog-extension-nuget.png</PackageIconUrl>-->
         <PackageIcon>serilog-extension-nuget.png</PackageIcon>
         <PackageTags>serilog;json</PackageTags>
         <!--<PackageIconUrl>http://serilog.net/images/serilog-extension-nuget.png</PackageIconUrl>-->
