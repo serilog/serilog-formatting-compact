@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <Description>A simple, compact JSON-based event format for Serilog.</Description>
@@ -11,7 +11,6 @@
         <AssemblyOriginatorKeyFile>../../assets/Serilog.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
         <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-        <!--<PackageIconUrl>http://serilog.net/images/serilog-extension-nuget.png</PackageIconUrl>-->
         <PackageIcon>serilog-extension-nuget.png</PackageIcon>
         <PackageTags>serilog;json</PackageTags>
         <PackageProjectUrl>https://github.com/serilog/serilog-formatting-compact</PackageProjectUrl>
@@ -22,23 +21,13 @@
         <AnalysisLevel>6.0-recommended</AnalysisLevel>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-        <WarningLevel>5</WarningLevel>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
         <WarningLevel>5</WarningLevel>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Serilog" Version="3.0.1" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="serilog-extension-nuget.png">
-            <Pack>True</Pack>
-            <PackagePath></PackagePath>
-        </None>
+        <None Include="serilog-extension-nuget.png" Pack="True" Visible="False" PackagePath="" />
     </ItemGroup>
 
 </Project>
