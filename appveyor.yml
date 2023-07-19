@@ -6,7 +6,7 @@ install:
   - ps: ./Setup.ps1
 build_script:
 - ps: ./Build.ps1
-test: off
+test: false
 artifacts:
 - path: artifacts/Serilog.*.nupkg
 deploy:

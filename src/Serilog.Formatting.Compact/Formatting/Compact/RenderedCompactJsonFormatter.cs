@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.Globalization;
 using System.IO;
 using Serilog.Events;
 using Serilog.Formatting.Json;
@@ -63,11 +64,11 @@ namespace Serilog.Formatting.Compact
             output.Write("{\"@t\":\"");
             output.Write(logEvent.Timestamp.UtcDateTime.ToString("O"));
             output.Write("\",\"@m\":");
-            var message = logEvent.MessageTemplate.Render(logEvent.Properties);
+            var message = logEvent.MessageTemplate.Render(logEvent.Properties, CultureInfo.InvariantCulture);
             JsonValueFormatter.WriteQuotedJsonString(message, output);
             output.Write(",\"@i\":\"");
             var id = EventIdHash.Compute(logEvent.MessageTemplate.Text);
-            output.Write(id.ToString("x8"));
+            output.Write(id.ToString("x8",CultureInfo.InvariantCulture));
             output.Write('"');
 
             if (logEvent.Level != LogEventLevel.Information)

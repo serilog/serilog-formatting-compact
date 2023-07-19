@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using Serilog.Events;
@@ -76,12 +77,12 @@ namespace Serilog.Formatting.Compact
             {
                 output.Write(",\"@r\":[");
                 var delim = "";
-                foreach (var r in tokensWithFormat)
+                foreach (PropertyToken r in tokensWithFormat)
                 {
                     output.Write(delim);
                     delim = ",";
                     var space = new StringWriter();
-                    r.Render(logEvent.Properties, space);
+                    r.Render(logEvent.Properties, space, CultureInfo.InvariantCulture);
                     JsonValueFormatter.WriteQuotedJsonString(space.ToString(), output);
                 }
                 output.Write(']');
