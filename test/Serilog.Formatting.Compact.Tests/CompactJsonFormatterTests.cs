@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using Newtonsoft.Json.Linq;
+using Serilog.Events;
 using Xunit;
 using Serilog.Formatting.Compact.Tests.Support;
+using Serilog.Parsing;
 
 
 namespace Serilog.Formatting.Compact.Tests
@@ -76,6 +80,19 @@ namespace Serilog.Formatting.Compact.Tests
             JToken val;
             Assert.True(jobject.TryGetValue("@t", out val));
             Assert.EndsWith("Z", val.ToObject<string>());
+        }
+
+        [Fact]
+        public void TraceAndSpanIdsGenerateValidJson()
+        {
+            var traceId = ActivityTraceId.CreateRandom();
+            var spanId = ActivitySpanId.CreateRandom();
+            var evt = new LogEvent(DateTimeOffset.Now, LogEventLevel.Information, null,
+                new MessageTemplate(Enumerable.Empty<MessageTemplateToken>()), Enumerable.Empty<LogEventProperty>(),
+                traceId, spanId);
+            var json = AssertValidJson(log => log.Write(evt));
+            Assert.Equal(traceId.ToHexString(), json["@tr"]);
+            Assert.Equal(spanId.ToHexString(), json["@sp"]);
         }
     }
 }
