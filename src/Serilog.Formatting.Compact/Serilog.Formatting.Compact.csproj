@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <Description>A simple, compact JSON-based event format for Serilog.</Description>
-        <VersionPrefix>2.0.0</VersionPrefix>
+        <VersionPrefix>2.0.1</VersionPrefix>
         <Authors>Serilog Contributors</Authors>
         <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT'">net462;net471</TargetFrameworks>
         <TargetFrameworks>$(TargetFrameworks);netstandard2.0;netstandard2.1;net6.0;net7.0</TargetFrameworks>
