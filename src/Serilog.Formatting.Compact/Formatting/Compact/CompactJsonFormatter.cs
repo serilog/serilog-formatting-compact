@@ -13,11 +13,13 @@
 // limitations under the License.
 
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using Serilog.Events;
 using Serilog.Formatting.Json;
 using Serilog.Parsing;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace Serilog.Formatting.Compact
 {
@@ -76,12 +78,12 @@ namespace Serilog.Formatting.Compact
             {
                 output.Write(",\"@r\":[");
                 var delim = "";
-                foreach (var r in tokensWithFormat)
+                foreach (PropertyToken r in tokensWithFormat)
                 {
                     output.Write(delim);
                     delim = ",";
                     var space = new StringWriter();
-                    r.Render(logEvent.Properties, space);
+                    r.Render(logEvent.Properties, space, CultureInfo.InvariantCulture);
                     JsonValueFormatter.WriteQuotedJsonString(space.ToString(), output);
                 }
                 output.Write(']');
@@ -98,6 +100,20 @@ namespace Serilog.Formatting.Compact
             {
                 output.Write(",\"@x\":");
                 JsonValueFormatter.WriteQuotedJsonString(logEvent.Exception.ToString(), output);
+            }
+
+            if (logEvent.TraceId != null)
+            {
+                output.Write(",\"@tr\":\"");
+                output.Write(logEvent.TraceId.Value.ToHexString());
+                output.Write('\"');
+            }
+
+            if (logEvent.SpanId != null)
+            {
+                output.Write(",\"@sp\":\"");
+                output.Write(logEvent.SpanId.Value.ToHexString());
+                output.Write('\"');
             }
 
             foreach (var property in logEvent.Properties)
