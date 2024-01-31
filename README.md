@@ -87,6 +87,8 @@ The format defines a handful of reified properties that have special meaning:
 | `@x` | Exception | A language-dependent error representation potentially including backtrace | |
 | `@i` | Event id | An implementation specific event id (string or number) | |
 | `@r` | Renderings | If `@mt` includes tokens with programming-language-specific formatting, an array of pre-rendered values for each such token | May be omitted; if present, the count of renderings must match the count of formatted tokens exactly |
+| `@tr` | Trace id | The id of the trace that was active when the event was created, if any | |
+| `@sp` | Span id | The id of the span that was active when the event was created, if any | |
 
 The `@` sigil may be escaped at the start of a user property name by doubling, e.g. `@@name` denotes a property called `@name`.
 

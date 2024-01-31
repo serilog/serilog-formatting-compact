@@ -22,7 +22,7 @@ using Serilog.Formatting.Json;
 namespace Serilog.Formatting.Compact
 {
     /// <summary>
-    /// An <see cref="ITextFormatter"/> that writes events in a compact JSON format, for consumption in environments 
+    /// An <see cref="ITextFormatter"/> that writes events in a compact JSON format, for consumption in environments
     /// without message template support. Message templates are rendered into text and a hashed event id is included.
     /// </summary>
     public class RenderedCompactJsonFormatter : ITextFormatter
@@ -84,7 +84,7 @@ namespace Serilog.Formatting.Compact
                 output.Write(",\"@x\":");
                 JsonValueFormatter.WriteQuotedJsonString(logEvent.Exception.ToString(), output);
             }
-            
+
             if (logEvent.TraceId != null)
             {
                 output.Write(",\"@tr\":\"");
@@ -98,7 +98,7 @@ namespace Serilog.Formatting.Compact
                 output.Write(logEvent.SpanId.Value.ToHexString());
                 output.Write('\"');
             }
-            
+
             foreach (var property in logEvent.Properties)
             {
                 var name = property.Key;

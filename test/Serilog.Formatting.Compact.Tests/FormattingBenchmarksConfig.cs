@@ -7,7 +7,7 @@ namespace Serilog.Formatting.Compact.Tests
     {
         public FormattingBenchmarksConfig()
         {
-            this.AddJob(Job.Default.WithIterationCount(10));
+            AddJob(Job.Default.WithIterationCount(10));
         }
     }
 }
