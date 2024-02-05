@@ -7,9 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{037440DE-440
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{E9D1B5E1-DEB9-4A04-8BAB-24EC7240ADAF}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		appveyor.yml = appveyor.yml
 		Build.ps1 = Build.ps1
 		CHANGES.md = CHANGES.md
+		Directory.Build.props = Directory.Build.props
 		LICENSE = LICENSE
 		README.md = README.md
 		assets\Serilog.snk = assets\Serilog.snk
@@ -43,5 +45,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E0BB862A-8B2C-46B5-9C90-B2F94C32EAB3} = {037440DE-440B-4129-9F7A-09B42D00397E}
 		{BAEECC42-EC0C-4955-8AA1-BD3F4F0F4AAD} = {67B1C971-75EE-4ABE-B184-66AAC8D9D572}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA2A0C20-8F2A-4EAE-ADD4-2CAFD022FB23}
 	EndGlobalSection
 EndGlobal
