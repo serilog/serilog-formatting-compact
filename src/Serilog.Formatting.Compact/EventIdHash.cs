@@ -22,9 +22,9 @@ namespace Serilog.Formatting.Compact
     public static class EventIdHash
     {
         /// <summary>
-        /// Compute a 32-bit hash of the provided <paramref name="messageTemplate"/>. The
-        /// resulting hash value can be uses as an event id in lieu of transmitting the
-        /// full template string.
+        /// Compute a 32-bit hash of the provided <paramref name="messageTemplate"/>.
+        /// The resulting hash value can be uses as an event id in lieu of transmitting
+        /// the full template string.
         /// </summary>
         /// <param name="messageTemplate">A message template.</param>
         /// <returns>A 32-bit hash of the template.</returns>
