@@ -9,8 +9,8 @@ namespace Serilog.Formatting.Compact.Tests;
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "Does not matter here")]
 public class FormattingBenchmarks
 {
-    private readonly LogEvent _evt;
-    private readonly ITextFormatter _jsonFormatter = new JsonFormatter(),
+    readonly LogEvent _evt;
+    readonly ITextFormatter _jsonFormatter = new JsonFormatter(),
         _compactFormatter = new CompactJsonFormatter(),
         _renderedJsonFormatter = new JsonFormatter(renderMessage: true),
         _renderedCompactFormatter = new RenderedCompactJsonFormatter();
@@ -27,7 +27,7 @@ public class FormattingBenchmarks
         _evt = collectorSink.LastCollected;
     }
 
-    private StringWriter _buffer = null!;
+    StringWriter _buffer = null!;
 
     [GlobalSetup]
     public void InitBuffer()
