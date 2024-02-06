@@ -22,12 +22,11 @@
     <Nullable>enable</Nullable>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>6.0-recommended</AnalysisLevel>
     <ImplicitUsings>enable</ImplicitUsings>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <AssemblyOriginatorKeyFile>../../assets/Serilog.snk</AssemblyOriginatorKeyFile>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisLevel>6.0-recommended</AnalysisLevel>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsPackable)' == 'true'">

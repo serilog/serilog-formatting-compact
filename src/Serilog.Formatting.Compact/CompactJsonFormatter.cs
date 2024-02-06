@@ -25,7 +25,7 @@ namespace Serilog.Formatting.Compact;
 /// </summary>
 public class CompactJsonFormatter: ITextFormatter
 {
-    private readonly JsonValueFormatter _valueFormatter;
+    readonly JsonValueFormatter _valueFormatter;
 
     /// <summary>
     /// Construct a <see cref="CompactJsonFormatter"/>, optionally supplying a formatter for

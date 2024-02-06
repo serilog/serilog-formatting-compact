@@ -68,7 +68,7 @@ public class CompactJsonFormatterTests
     }
 
     [Fact]
-    public void TimestampIsUTC()
+    public void TimestampIsUtc()
     {
         // Not possible in message templates, but accepted this way
         var jobject = AssertValidJson(log => log.Information("Hello"));

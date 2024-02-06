@@ -3,9 +3,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Serilog.Formatting.Compact.Tests.Support;
 
-internal static class Assertions
+static class Assertions
 {
-    private static readonly JsonSerializerSettings _settings = new()
+    static readonly JsonSerializerSettings _settings = new()
     {
         DateParseHandling = DateParseHandling.None
     };
