@@ -7,7 +7,7 @@ namespace Serilog.Formatting.Compact.Tests;
 
 public class RenderedCompactJsonFormatterTests
 {
-    private static JObject AssertValidJson(Action<ILogger> act)
+    static JObject AssertValidJson(Action<ILogger> act)
     {
         return Assertions.AssertValidJson(new RenderedCompactJsonFormatter(), act);
     }
