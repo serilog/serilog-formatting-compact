@@ -13,7 +13,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageIcon>serilog-extension-nuget.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
-    <DebugType>embedded</DebugType>
+    <!--<DebugType>embedded</DebugType>--> <!--snupkg package is published for now, see https://github.com/serilog/serilog-formatting-compact/pull/61#discussion_r1479075400-->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables -->

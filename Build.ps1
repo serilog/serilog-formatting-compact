@@ -21,9 +21,9 @@ Write-Output "build: Build version suffix is $buildSuffix"
 if ($LASTEXITCODE -ne 0) { throw 'build failed' }
 
 if ($suffix) {
-    & dotnet pack src\Serilog.Formatting.Compact --configuration Release --no-build --no-restore -o artifacts --version-suffix=$suffix
+    & dotnet pack src\Serilog.Formatting.Compact --configuration Release --no-build --no-restore -o artifacts /p:IncludeSymbols=true /p:SymbolPackageFormat=snupkg --version-suffix=$suffix
 } else {
-    & dotnet pack src\Serilog.Formatting.Compact --configuration Release --no-build --no-restore -o artifacts
+    & dotnet pack src\Serilog.Formatting.Compact --configuration Release --no-build --no-restore -o artifacts /p:IncludeSymbols=true /p:SymbolPackageFormat=snupkg
 }
 
 if ($LASTEXITCODE -ne 0) { throw 'pack failed' }
