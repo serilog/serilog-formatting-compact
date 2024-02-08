@@ -1,13 +1,12 @@
 ﻿using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 
-namespace Serilog.Formatting.Compact.Tests
+namespace Serilog.Formatting.Compact.Tests;
+
+public class FormattingBenchmarksConfig : ManualConfig
 {
-    public class FormattingBenchmarksConfig : ManualConfig
+    public FormattingBenchmarksConfig()
     {
-        public FormattingBenchmarksConfig()
-        {
-            AddJob(Job.Default.WithIterationCount(10));
-        }
+        AddJob(Job.Default.WithIterationCount(10));
     }
 }

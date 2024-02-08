@@ -1,14 +1,13 @@
 ﻿using BenchmarkDotNet.Running;
 using Xunit;
 
-namespace Serilog.Formatting.Compact.Tests
+namespace Serilog.Formatting.Compact.Tests;
+
+public class Benchmarks
 {
-    public class Benchmarks
+    [Fact(Skip = "Not supported on CLI 1.0.0-preview3")]
+    public void Benchmark()
     {
-        [Fact(Skip = "Not supported on CLI 1.0.0-preview3")]
-        public void Benchmark()
-        {
-            BenchmarkRunner.Run<FormattingBenchmarks>();
-        }
+        BenchmarkRunner.Run<FormattingBenchmarks>();
     }
 }

@@ -1,36 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <Description>A simple, compact JSON-based event format for Serilog.</Description>
-        <VersionPrefix>2.0.1</VersionPrefix>
-        <Authors>Serilog Contributors</Authors>
-        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT'">net462;net471</TargetFrameworks>
-        <TargetFrameworks>$(TargetFrameworks);netstandard2.0;netstandard2.1;net6.0;net7.0</TargetFrameworks>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <AssemblyOriginatorKeyFile>../../assets/Serilog.snk</AssemblyOriginatorKeyFile>
-        <SignAssembly>true</SignAssembly>
-        <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-        <PackageIcon>serilog-extension-nuget.png</PackageIcon>
-        <PackageTags>serilog;json</PackageTags>
-        <PackageProjectUrl>https://github.com/serilog/serilog-formatting-compact</PackageProjectUrl>
-        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <RepositoryUrl>https://github.com/serilog/serilog-formatting-compact</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-        <AnalysisLevel>6.0-recommended</AnalysisLevel>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-    </PropertyGroup>
+  <PropertyGroup>
+    <Description>A simple, compact JSON-based event format for Serilog.</Description>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT'">net462;net471</TargetFrameworks>
+    <TargetFrameworks>$(TargetFrameworks);netstandard2.0;netstandard2.1;net6.0;net7.0</TargetFrameworks>
+  </PropertyGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-        <WarningLevel>5</WarningLevel>
-    </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Serilog" Version="3.1.0" />
-        <None Include="../../assets/serilog-extension-nuget.png" Pack="True" Visible="False" PackagePath="" />
-        <None Include="../../README.md" Pack="True" Visible="False" PackagePath="" />
-        <InternalsVisibleTo Include="Serilog.Formatting.Compact.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100fb8d13fd344a1c6fe0fe83ef33c1080bf30690765bc6eb0df26ebfdf8f21670c64265b30db09f73a0dea5b3db4c9d18dbf6d5a25af5ce9016f281014d79dc3b4201ac646c451830fc7e61a2dfd633d34c39f87b81894191652df5ac63cc40c77f3542f702bda692e6e8a9158353df189007a49da0f3cfd55eb250066b19485ec" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="3.1.0" />
+    <InternalsVisibleTo Include="Serilog.Formatting.Compact.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100fb8d13fd344a1c6fe0fe83ef33c1080bf30690765bc6eb0df26ebfdf8f21670c64265b30db09f73a0dea5b3db4c9d18dbf6d5a25af5ce9016f281014d79dc3b4201ac646c451830fc7e61a2dfd633d34c39f87b81894191652df5ac63cc40c77f3542f702bda692e6e8a9158353df189007a49da0f3cfd55eb250066b19485ec" />
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
 
 </Project>
