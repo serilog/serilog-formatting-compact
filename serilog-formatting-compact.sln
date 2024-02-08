@@ -22,6 +22,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Formatting.Compact"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Formatting.Compact.Tests", "test\Serilog.Formatting.Compact.Tests\Serilog.Formatting.Compact.Tests.csproj", "{BAEECC42-EC0C-4955-8AA1-BD3F4F0F4AAD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{41318B5C-7F2D-4DC9-B473-00FB933DA396}"
+	ProjectSection(SolutionItems) = preProject
+		.github\dependabot.yml = .github\dependabot.yml
+		.github\labeler.yml = .github\labeler.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{CE8D23A2-D269-4C24-8C5F-2CFC8DC92C8E}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
+		.github\workflows\label.yml = .github\workflows\label.yml
+		.github\workflows\stale.yml = .github\workflows\stale.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,5 +56,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E0BB862A-8B2C-46B5-9C90-B2F94C32EAB3} = {037440DE-440B-4129-9F7A-09B42D00397E}
 		{BAEECC42-EC0C-4955-8AA1-BD3F4F0F4AAD} = {67B1C971-75EE-4ABE-B184-66AAC8D9D572}
+		{CE8D23A2-D269-4C24-8C5F-2CFC8DC92C8E} = {41318B5C-7F2D-4DC9-B473-00FB933DA396}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {821D6048-A7EE-4384-B329-C3C351E5826F}
 	EndGlobalSection
 EndGlobal
