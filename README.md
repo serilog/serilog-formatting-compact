@@ -15,7 +15,7 @@ A simple `Hello, {User}` event.
 Install from [NuGet](https://nuget.org/packages/Serilog.Formatting.Compact):
 
 ```powershell
-Install-Package Serilog.Formatting.Compact
+dotnet add package Serilog.Formatting.Compact
 ```
 
 The formatter is used in conjunction with sinks that accept `ITextFormatter`. For example, the [file](https://github.com/serilog/serilog-sinks-file) sink:
@@ -26,6 +26,7 @@ Log.Logger = new LoggerConfiguration()
   .CreateLogger();
 ```
 #### XML `<appSettings>` configuration
+
 To specify the formatter in XML `<appSettings>` provide its assembly-qualified type name:
 
 ```xml
@@ -87,6 +88,8 @@ The format defines a handful of reified properties that have special meaning:
 | `@x` | Exception | A language-dependent error representation potentially including backtrace | |
 | `@i` | Event id | An implementation specific event id (string or number) | |
 | `@r` | Renderings | If `@mt` includes tokens with programming-language-specific formatting, an array of pre-rendered values for each such token | May be omitted; if present, the count of renderings must match the count of formatted tokens exactly |
+| `@tr` | Trace id | The id of the trace that was active when the event was created, if any | |
+| `@sp` | Span id | The id of the span that was active when the event was created, if any | |
 
 The `@` sigil may be escaped at the start of a user property name by doubling, e.g. `@@name` denotes a property called `@name`.
 
@@ -152,3 +155,7 @@ Several tools are available for working with the CLEF format.
  * **[Compact Log Format Viewer](https://github.com/warrenbuckley/Compact-Log-Format-Viewer)** - a cross-platform viewer for CLEF files
  * **[`seqcli`](https://github.com/datalust/seqcli)** - pretty-`print` CLEF files at the command-line, or `ingest` CLEF files into [Seq](https://datalust.co/seq) for search, and analysis
  * **[_Serilog.Formatting.Compact.Reader_](https://github.com/serilog/serilog-formatting-compact-reader)** - convert CLEF documents back into Serilog `LogEvent`s
+
+### Customizing output
+
+_Serilog.Formatting.Compact_ is not intended to provide customizable formatters. See [this blog post](https://nblumhardt.com/2021/06/customize-serilog-json-output/) for comprehensive Serilog JSON output customization examples.

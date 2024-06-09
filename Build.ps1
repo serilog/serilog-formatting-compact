@@ -2,7 +2,7 @@ Write-Output "build: Build started"
 
 Push-Location $PSScriptRoot
 
-if(Test-Path .\artifacts) {
+if (Test-Path .\artifacts) {
     Write-Output "build: Cleaning .\artifacts"
     Remove-Item .\artifacts -Force -Recurse
 }
@@ -18,18 +18,18 @@ Write-Output "build: Build version suffix is $buildSuffix"
 
 & dotnet build --configuration Release --version-suffix=$buildSuffix /p:ContinuousIntegrationBuild=true
 
-if($LASTEXITCODE -ne 0) { throw 'build failed' }
+if ($LASTEXITCODE -ne 0) { throw 'build failed' }
 
-if($suffix) {
+if ($suffix) {
     & dotnet pack src\Serilog.Formatting.Compact --configuration Release --no-build --no-restore -o artifacts --version-suffix=$suffix
 } else {
     & dotnet pack src\Serilog.Formatting.Compact --configuration Release --no-build --no-restore -o artifacts
 }
 
-if($LASTEXITCODE -ne 0) { throw 'pack failed' }
+if ($LASTEXITCODE -ne 0) { throw 'pack failed' }
 
 Write-Output "build: Testing"
 
 & dotnet test  test\Serilog.Formatting.Compact.Tests --configuration Release --no-build --no-restore
 
-if($LASTEXITCODE -ne 0) { throw 'unit tests failed' }
+if ($LASTEXITCODE -ne 0) { throw 'unit tests failed' }
